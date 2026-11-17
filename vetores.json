@@ -1,0 +1,224 @@
+{
+ "descricao": "Vetores de conformidade: toda implementação de CPF/CNPJ deve dar o mesmo valido (e, as completas, o mesmo motivo) para cada entrada. Caso novo de erro real entra aqui primeiro.",
+ "motivos": "ver regras.json",
+ "cpf": [
+  {
+   "entrada": "529.982.247-25",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "exemplo comum, com máscara"
+  },
+  {
+   "entrada": "52998224725",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "sem máscara"
+  },
+  {
+   "entrada": "111.444.777-35",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "exemplo do passo a passo"
+  },
+  {
+   "entrada": "123.456.789-09",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "região fiscal 8 (SP)"
+  },
+  {
+   "entrada": " 529 982 247 25 ",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "espaços"
+  },
+  {
+   "entrada": "000.000.001-91",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "zeros à esquerda"
+  },
+  {
+   "entrada": "529.982.247-35",
+   "valido": false,
+   "motivo": "dv1",
+   "nota": "1º DV errado"
+  },
+  {
+   "entrada": "529.982.247-26",
+   "valido": false,
+   "motivo": "dv2",
+   "nota": "2º DV errado"
+  },
+  {
+   "entrada": "111.111.111-11",
+   "valido": false,
+   "motivo": "repetido",
+   "nota": "todos iguais"
+  },
+  {
+   "entrada": "000.000.000-00",
+   "valido": false,
+   "motivo": "repetido",
+   "nota": "todos zero"
+  },
+  {
+   "entrada": "5299822472",
+   "valido": false,
+   "motivo": "tamanho",
+   "nota": "10 dígitos (planilha comeu o zero)"
+  },
+  {
+   "entrada": "529982247250",
+   "valido": false,
+   "motivo": "tamanho",
+   "nota": "12 dígitos"
+  },
+  {
+   "entrada": "",
+   "valido": false,
+   "motivo": "vazio",
+   "nota": "vazio"
+  },
+  {
+   "entrada": "   ",
+   "valido": false,
+   "motivo": "vazio",
+   "nota": "só espaço"
+  },
+  {
+   "entrada": "529.982.247-25x",
+   "valido": false,
+   "motivo": "caractere",
+   "nota": "letra no fim"
+  },
+  {
+   "entrada": "529/982/247-25",
+   "valido": false,
+   "motivo": "caractere",
+   "nota": "barra não é máscara de CPF"
+  },
+  {
+   "entrada": "５２９９８２２４７２５",
+   "valido": false,
+   "motivo": "caractere",
+   "nota": "dígito de largura total (Unicode)"
+  }
+ ],
+ "cnpj": [
+  {
+   "entrada": "11.222.333/0001-81",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "numérico, matriz"
+  },
+  {
+   "entrada": "11222333000181",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "sem máscara"
+  },
+  {
+   "entrada": "12.ABC.345/01DE-35",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "exemplo oficial alfanumérico"
+  },
+  {
+   "entrada": "12abc34501de35",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "minúsculas são aceitas"
+  },
+  {
+   "entrada": "12.ABC.345/01DE-36",
+   "valido": false,
+   "motivo": "dv2",
+   "nota": "2º DV errado"
+  },
+  {
+   "entrada": "12.ABC.345/01DE-45",
+   "valido": false,
+   "motivo": "dv1",
+   "nota": "1º DV errado"
+  },
+  {
+   "entrada": "11.222.333/0001-91",
+   "valido": false,
+   "motivo": "dv1",
+   "nota": "1º DV errado (numérico)"
+  },
+  {
+   "entrada": "11.222.333/0001-82",
+   "valido": false,
+   "motivo": "dv2",
+   "nota": "2º DV errado (numérico)"
+  },
+  {
+   "entrada": "12ABC34501DE3A",
+   "valido": false,
+   "motivo": "dv-letra",
+   "nota": "letra no DV"
+  },
+  {
+   "entrada": "00000000000000",
+   "valido": false,
+   "motivo": "repetido",
+   "nota": "todos zero"
+  },
+  {
+   "entrada": "AAAAAAAAAAAA00",
+   "valido": false,
+   "motivo": "dv1",
+   "nota": "quase todos iguais, DV não fecha"
+  },
+  {
+   "entrada": "12.ÁBC.345/01DE-35",
+   "valido": false,
+   "motivo": "caractere",
+   "nota": "acento"
+  },
+  {
+   "entrada": "12ABC34ß1DE09",
+   "valido": false,
+   "motivo": "caractere",
+   "nota": "ß: o toUpperCase() do Unicode faria dele 12ABC34SS1DE09, que fecha a conta"
+  },
+  {
+   "entrada": "12abc345ı1de04",
+   "valido": false,
+   "motivo": "caractere",
+   "nota": "i sem ponto: o toUpperCase() do Unicode faria dele 12ABC345I1DE04, que fecha a conta"
+  },
+  {
+   "entrada": "12ABC345I1DE04",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "o mesmo com I de verdade é válido"
+  },
+  {
+   "entrada": "1122233300018",
+   "valido": false,
+   "motivo": "tamanho",
+   "nota": "13 caracteres"
+  },
+  {
+   "entrada": "",
+   "valido": false,
+   "motivo": "vazio",
+   "nota": "vazio"
+  },
+  {
+   "entrada": "12.ABC.345/01DE-3",
+   "valido": false,
+   "motivo": "tamanho",
+   "nota": "13 caracteres, alfanumérico"
+  },
+  {
+   "entrada": "11.222.333/0002-62",
+   "valido": true,
+   "motivo": "ok",
+   "nota": "numérico, filial 0002"
+  }
+ ]
+}

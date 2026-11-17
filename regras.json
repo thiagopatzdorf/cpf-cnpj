@@ -1,0 +1,72 @@
+{
+  "nome": "cpf-cnpj",
+  "descricao": "Todas as regras de formato e dígito verificador do CPF e do CNPJ (numérico e alfanumérico) num lugar só. As implementações deste repositório são conferidas contra este arquivo e contra vetores.json.",
+  "conferido_em": "2026-11-17",
+  "cpf": {
+    "tamanho": 11,
+    "mascara": "000.000.000-00",
+    "caracteres": "0123456789",
+    "mascara_aceita": [".", "-", "espaço"],
+    "partes": {"base": [1, 8], "regiao_fiscal": [9, 9], "dv": [10, 11]},
+    "dv": {
+      "modulo": 11,
+      "pesos_1": [10, 9, 8, 7, 6, 5, 4, 3, 2],
+      "pesos_2": [11, 10, 9, 8, 7, 6, 5, 4, 3, 2],
+      "resto_0_ou_1": 0,
+      "senao": "11 - resto"
+    },
+    "todos_iguais_invalido": true,
+    "regiao_fiscal": {
+      "0": ["RS"],
+      "1": ["DF", "GO", "MS", "MT", "TO"],
+      "2": ["AC", "AM", "AP", "PA", "RO", "RR"],
+      "3": ["CE", "MA", "PI"],
+      "4": ["AL", "PB", "PE", "RN"],
+      "5": ["BA", "SE"],
+      "6": ["MG"],
+      "7": ["ES", "RJ"],
+      "8": ["SP"],
+      "9": ["PR", "SC"]
+    }
+  },
+  "cnpj": {
+    "tamanho": 14,
+    "mascara": "00.000.000/0000-00",
+    "caracteres_base": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "caracteres_dv": "0123456789",
+    "minusculas": "aceitas na entrada e passadas a maiúsculas (só a-z ASCII)",
+    "mascara_aceita": [".", "/", "-", "espaço"],
+    "partes": {"raiz": [1, 8], "ordem": [9, 12], "dv": [13, 14]},
+    "ordem_da_matriz": "0001",
+    "valor_do_caractere": "código ASCII - 48 ('0'..'9' = 0..9, 'A'..'Z' = 17..42)",
+    "dv": {
+      "modulo": 11,
+      "pesos_1": [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
+      "pesos_2": [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
+      "resto_0_ou_1": 0,
+      "senao": "11 - resto"
+    },
+    "todos_iguais_invalido": true,
+    "alfanumerico": {
+      "norma": "IN RFB nº 2.229/2024",
+      "inicio": "2026-07",
+      "convivencia": "os CNPJs numéricos continuam valendo e não mudam; a mesma conta valida os dois formatos"
+    },
+    "exemplo_oficial": "12.ABC.345/01DE-35"
+  },
+  "motivos": {
+    "ok": "válido",
+    "vazio": "nada foi digitado",
+    "caractere": "tem caractere fora do alfabeto do documento e da máscara",
+    "tamanho": "não tem 11 (CPF) ou 14 (CNPJ) posições",
+    "dv-letra": "CNPJ com letra num dígito verificador (os dois últimos são sempre números)",
+    "repetido": "todos os caracteres iguais: a conta fecha, mas a Receita não emite",
+    "dv1": "1º dígito verificador errado",
+    "dv2": "2º dígito verificador errado"
+  },
+  "fontes": [
+    {"o_que": "Cálculo do DV do CNPJ alfanumérico (ASCII - 48, pesos 2 a 9, módulo 11, exemplo 12.ABC.345/01DE-35)", "fonte": "Receita Federal/Serpro, manual de cálculo do DV do CNPJ alfanumérico"},
+    {"o_que": "Formato alfanumérico e início em julho de 2026", "fonte": "Receita Federal, IN RFB nº 2.229/2024 e perguntas e respostas do CNPJ alfanumérico"},
+    {"o_que": "9º dígito do CPF = região fiscal", "fonte": "Receita Federal, folheto CPF (Educação Fiscal)"}
+  ]
+}

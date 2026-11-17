@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cpf-cnpj"
+version = "1.0.0"
+description = "Regras de referência do CPF e do CNPJ (numérico e alfanumérico): validar, explicar o erro, formatar e gerar. Sem dependência."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+[project.urls]
+Homepage = "https://cpf.genesisinnovation.io"
+Repository = "https://github.com/thiagopatzdorf/cpf-cnpj"
+
+[project.scripts]
+cpf-cnpj = "cpf_cnpj:_principal_cli"
+
+[tool.setuptools]
+package-dir = { "" = "python" }
+py-modules = ["cpf_cnpj"]

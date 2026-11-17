@@ -1,0 +1,17 @@
+{
+  "name": "cpf-cnpj",
+  "version": "1.0.0",
+  "description": "Regras de referência do CPF e do CNPJ (numérico e alfanumérico, IN RFB 2.229/2024): validar, explicar o erro, formatar e gerar. Sem dependência.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./cpf": "./js/cpf.mjs",
+    "./cnpj": "./js/cnpj.mjs",
+    "./regras.json": "./regras.json",
+    "./vetores.json": "./vetores.json"
+  },
+  "files": ["js", "regras.json", "vetores.json", "funcoes"],
+  "scripts": { "test": "node --test tests/" },
+  "repository": { "type": "git", "url": "https://github.com/thiagopatzdorf/cpf-cnpj" },
+  "homepage": "https://cpf.genesisinnovation.io"
+}
