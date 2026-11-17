@@ -78,7 +78,24 @@ Linha de comando: `cpf-cnpj validar 529.982.247-25 12.ABC.345/01DE-35` (sai 1 se
 **Copiar e colar:** [`funcoes/valida.js`](funcoes/valida.js), [`funcoes/valida.py`](funcoes/valida.py) e
 [`funcoes/valida.sql`](funcoes/valida.sql) (PostgreSQL, para `CHECK (valida_cnpj(cnpj))`).
 
-## Testes
+## API e MCP (grátis, sem cadastro)
+
+A mesma regra, servida pela Genesis:
+
+```sh
+curl -s https://genesisinnovation.io/api/v1/validar_cpf_cnpj \
+  -H 'content-type: application/json' \
+  -d '{"documentos": ["529.982.247-25", "12.ABC.345/01DE-35"]}'
+curl -s 'https://genesisinnovation.io/api/v1/gerar_cpf_cnpj?tipo=cnpj_alfanumerico&quantidade=5&semente=42'
+```
+
+- `validar_cpf_cnpj`: de 1 a 100 documentos por chamada; cada um volta com `valido`, `motivo` e `mensagem`
+  e, quando dá, o `formatado` e os dígitos `esperado`.
+- `gerar_cpf_cnpj`: `tipo` (`cpf`, `cnpj`, `cnpj_alfanumerico`), `quantidade` (1 a 100), `uf` (CPF), `filial`
+  (CNPJ), `com_mascara` e `semente` (mesma semente, mesma lista: bom para teste automatizado).
+- **MCP:** servidor `https://genesisinnovation.io/mcp`, sem autenticação, com as mesmas duas ferramentas.
+  Esquema em <https://genesisinnovation.io/openapi.json>.
+
 
 ```sh
 python -m unittest discover -s tests   # Python, funções de copiar, JS (se houver node) e SQL (com CPF_TESTE_PG)
